@@ -1,0 +1,86 @@
+---
+import { Icon } from 'astro-icon/components';
+import LeaoLogo from './LeaoLogo.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer id="contato" class="relative border-t border-white/10 bg-leao-blue/60">
+  <div class="section !py-16">
+    <div class="grid gap-12 md:grid-cols-3">
+      <!-- Marca -->
+      <div>
+        <div class="flex items-center gap-2.5">
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full
+                   bg-leao-orange/15 ring-1 ring-leao-orange/40 text-leao-orange"
+          >
+            <LeaoLogo class="h-7 w-7" />
+          </span>
+          <span class="font-display text-2xl">
+            Oficina <span class="text-leao-orange">Leão</span>
+          </span>
+        </div>
+        <p class="mt-4 max-w-sm text-leao-silver leading-relaxed">
+          Tradição familiar em mecânica desde 1974. Pai e filhos cuidando do seu
+          carro com a honestidade de quem conhece cada peça de perto.
+        </p>
+
+        <button type="button" data-open-specialist-picker class="btn-primary mt-6">
+          <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
+          Falar no WhatsApp
+        </button>
+      </div>
+
+      <!-- Endereço -->
+      <div>
+        <h3 class="text-lg font-display text-leao-white">Endereço</h3>
+        <ul class="mt-5 space-y-3 text-leao-silver">
+          <li class="flex items-start gap-3">
+            <Icon name="ph:map-pin-duotone" class="mt-0.5 h-5 w-5 text-leao-orange" />
+            <span>Rua da Esperança, 1070 - Barro, Recife<br />Recife — PE, 52291-427</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Horário -->
+      <div>
+        <h3 class="text-lg font-display text-leao-white">Horário</h3>
+        <ul class="mt-5 space-y-2 text-leao-silver">
+          <li class="flex items-center justify-between gap-4">
+            <span>Segunda a Sexta</span>
+            <span class="text-leao-white/90">08h — 18h</span>
+          </li>
+          <li class="flex items-center justify-between gap-4">
+            <span>Sábado</span>
+            <span class="text-leao-white/90">08h — 12h</span>
+          </li>
+          <li class="flex items-center justify-between gap-4">
+            <span>Domingo</span>
+            <span class="text-leao-silver/70">Fechado</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div
+      class="mt-14 flex flex-col items-start justify-between gap-4 border-t
+             border-white/10 pt-8 text-sm text-leao-silver sm:flex-row sm:items-center"
+    >
+      <p>© {year} Oficina Leão. Todos os direitos reservados.</p>
+      <p class="font-display italic">Desde 1974 · Recife</p>
+    </div>
+  </div>
+
+  <!-- Botão flutuante WhatsApp (mobile-first) -->
+  <button
+    type="button"
+    data-open-specialist-picker
+    aria-label="Falar no WhatsApp"
+    class="fixed bottom-5 right-5 z-40 flex h-14 w-14 items-center justify-center
+           rounded-full bg-leao-orange text-leao-white shadow-orange-glow
+           transition hover:brightness-110 hover:scale-105"
+  >
+    <Icon name="ph:whatsapp-logo-duotone" class="h-7 w-7" />
+  </button>
+</footer>

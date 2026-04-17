@@ -1,0 +1,165 @@
+---
+/**
+ * SpecialistPicker
+ * ----------------
+ * Modal que deixa o visitante escolher para qual especialista ele quer
+ * mandar WhatsApp. Usa o elemento nativo <dialog> — acessível, sem JS
+ * framework e sem hidratação de ilha.
+ *
+ * Uso:
+ *   import SpecialistPicker from '../components/SpecialistPicker.astro';
+ *   <SpecialistPicker specialists={[...]} />
+ *
+ *   <button data-open-specialist-picker>Solicitar Orçamento</button>
+ *
+ * Qualquer elemento com `data-open-specialist-picker` abre o modal.
+ */
+import { Icon } from 'astro-icon/components';
+
+export interface Specialist {
+  id: string;
+  title: string;
+  focus: string;
+  icon: string;
+  specialist: string;
+  phone: string;
+  waMessage: string;
+}
+
+export interface Props {
+  specialists: Specialist[];
+  id?: string;
+}
+
+const { specialists, id = 'specialist-picker' } = Astro.props;
+
+const encode = (msg: string) => encodeURIComponent(msg);
+const waLink = (phone: string, msg: string) =>
+  `https://wa.me/${phone}?text=${encode(msg)}`;
+---
+
+<dialog
+  id={id}
+  class="specialist-picker w-[min(92vw,560px)] rounded-3xl border border-white/10
+         bg-leao-blue/95 p-0 text-leao-white shadow-premium backdrop:bg-black/60
+         backdrop:backdrop-blur-sm"
+  aria-labelledby={`${id}-title`}
+>
+  <form method="dialog" class="relative">
+    <!-- Fechar -->
+    <button
+      type="submit"
+      value="cancel"
+      aria-label="Fechar"
+      class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center
+             rounded-full text-leao-silver transition hover:bg-white/10
+             hover:text-leao-white"
+    >
+      <Icon name="ph:x-bold" class="h-5 w-5" />
+    </button>
+
+    <div class="p-7 sm:p-9">
+      <h2
+        id={`${id}-title`}
+        class="font-display text-2xl sm:text-3xl text-leao-white pr-10"
+      >
+        Com qual <span class="text-leao-orange">especialista</span> você quer falar?
+      </h2>
+      <p class="mt-2 text-leao-silver">
+        Cada serviço é atendido por um filho da família. Escolha abaixo e
+        você será levado direto ao WhatsApp dele.
+      </p>
+
+      <ul class="mt-6 space-y-3">
+        {
+          specialists.map((s) => (
+            <li>
+              <a
+                href={waLink(s.phone, s.waMessage)}
+                target="_blank"
+                rel="noopener"
+                class="group flex items-center gap-4 rounded-2xl border border-white/10
+                       bg-white/[0.03] p-4 transition hover:border-leao-orange/40
+                       hover:bg-white/[0.06]"
+              >
+                <span
+                  class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl
+                         bg-leao-orange/15 text-leao-orange ring-1 ring-leao-orange/30
+                         transition group-hover:bg-leao-orange group-hover:text-leao-white"
+                >
+                  <Icon name={s.icon} class="h-6 w-6" />
+                </span>
+
+                <span class="flex-1 min-w-0">
+                  <span class="block font-display text-lg text-leao-white">
+                    {s.title}
+                  </span>
+                  <span class="block text-sm text-leao-silver truncate">
+                    {s.specialist}
+                  </span>
+                </span>
+
+                <Icon
+                  name="ph:whatsapp-logo-duotone"
+                  class="h-6 w-6 shrink-0 text-leao-orange transition group-hover:scale-110"
+                />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </form>
+</dialog>
+
+<script is:inline define:vars={{ id }}>
+  const dialog = document.getElementById(id);
+  if (dialog instanceof HTMLDialogElement) {
+    document
+      .querySelectorAll('[data-open-specialist-picker]')
+      .forEach((el) => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          dialog.showModal();
+        });
+      });
+
+    // Clicar no backdrop fecha
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close('cancel');
+    });
+  }
+</script>
+
+<style>
+  .specialist-picker[open] {
+    animation: picker-in 0.2s ease-out;
+  }
+  .specialist-picker::backdrop {
+    animation: backdrop-in 0.2s ease-out;
+  }
+  @keyframes picker-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .specialist-picker[open],
+    .specialist-picker::backdrop {
+      animation: none;
+    }
+  }
+</style>

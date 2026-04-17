@@ -1,0 +1,53 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  /** Nome do ícone no Phosphor Icons (ex.: 'ph:gear-six-duotone'). */
+  icon: string;
+  title: string;
+  description: string;
+  /** Texto curto para o rodapé do card (foco/diferencial). */
+  focus?: string;
+}
+
+const { icon, title, description, focus } = Astro.props;
+---
+
+<article
+  class="group relative flex flex-col overflow-hidden rounded-3xl glass p-8
+         transition duration-500 ease-out
+         hover:-translate-y-1 hover:border-leao-orange/40
+         hover:shadow-orange-glow motion-reduce:transform-none"
+>
+  <!-- Brilho decorativo sutil no canto -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full
+           bg-leao-orange/20 blur-3xl opacity-0 transition-opacity duration-500
+           group-hover:opacity-100"
+  >
+  </div>
+
+  <div
+    class="flex h-14 w-14 items-center justify-center rounded-2xl
+           bg-leao-orange/15 text-leao-orange ring-1 ring-leao-orange/30
+           transition group-hover:bg-leao-orange group-hover:text-leao-white"
+  >
+    <Icon name={icon} class="h-7 w-7" />
+  </div>
+
+  <h3 class="mt-6 text-2xl text-leao-white">{title}</h3>
+
+  <p class="mt-3 flex-1 text-leao-silver leading-relaxed">
+    {description}
+  </p>
+
+  {
+    focus && (
+      <div class="mt-6 flex items-center gap-2 text-sm text-leao-orange/90">
+        <Icon name="ph:shield-check-duotone" class="h-4 w-4" />
+        <span class="uppercase tracking-wider">{focus}</span>
+      </div>
+    )
+  }
+</article>

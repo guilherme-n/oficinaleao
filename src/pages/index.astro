@@ -1,0 +1,399 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import Testimonial from '../components/Testimonial.astro';
+import SpecialistPicker from '../components/SpecialistPicker.astro';
+import { Icon } from 'astro-icon/components';
+
+/**
+ * Cada especialidade tem sua própria seção e seu próprio WhatsApp,
+ * pois é atendida por um filho diferente. Substitua os números
+ * pelos contatos reais antes de publicar.
+ */
+const encode = (msg: string) => encodeURIComponent(msg);
+const waLink = (phone: string, msg: string) =>
+  `https://wa.me/${phone}?text=${encode(msg)}`;
+
+const specialties = [
+  {
+    id: 'caixa-de-marcha',
+    title: 'Caixa de Marcha',
+    focus: 'Precisão Técnica',
+    icon: 'ph:gear-six-duotone',
+    specialist: 'Iran Leão',
+    description:
+      'Revisão, retífica e troca de câmbios manuais e automáticos com precisão milimétrica. Diagnóstico preciso e peças selecionadas para uma troca de marchas suave e durável — exatamente como saiu de fábrica.',
+    bullets: [
+      'Retífica completa de câmbio manual',
+      'Diagnóstico de câmbios manuais',
+      'Troca de embreagem e volante bimassa',
+      'Teste em dinamômetro antes da entrega',
+    ],
+    phone: '5581984315470',
+    waMessage:
+      'Olá! Gostaria de um orçamento para serviço de caixa de marcha na Oficina Leão.',
+    image: '/images/especialista-cambio.jpeg',
+  },
+  {
+    id: 'pintura-lanternagem',
+    title: 'Pintura e Lanternagem',
+    focus: 'Acabamento Estético',
+    icon: 'ph:paint-roller-duotone',
+    specialist: 'Iraquitan Leão',
+    description:
+      'Recuperação de funilaria e pintura automotiva com acabamento espelhado. Cabine climatizada, tintas premium e atenção a cada detalhe — do amassado à cor original de fábrica.',
+    bullets: [
+      'Cabine de pintura climatizada',
+      'Tintas poliéster e base d’água',
+      'Polimento técnico e cristalização',
+      'Reparos de pequenos amassados (martelinho de ouro)',
+    ],
+    phone: '5581985012206',
+    waMessage:
+      'Olá! Gostaria de um orçamento para pintura e lanternagem na Oficina Leão.',
+    image: '/images/especialista-pintura.jpeg',
+  },
+  {
+    id: 'motor-mecanica',
+    title: 'Motor e Mecânica Geral',
+    focus: 'Performance e Diagnóstico',
+    icon: 'ph:engine-duotone',
+    specialist: 'Iverealdo Leão',
+    description:
+      'Diagnóstico computadorizado, retífica de motor, injeção eletrônica e manutenção preventiva. Performance devolvida ao seu carro com a confiança de décadas de oficina.',
+    bullets: [
+      'Retífica de motor (cabeçote, pistões, virabrequim)',
+      'Scanner automotivo multimarcas',
+      'Injeção eletrônica e sistema de arrefecimento',
+      'Revisão preventiva completa',
+    ],
+    phone: '5581988998533',
+    waMessage:
+      'Olá! Gostaria de um orçamento para serviço de motor e mecânica geral na Oficina Leão.',
+    image: '/images/especialista-motor.jpeg',
+  },
+] as const;
+
+const testimonials = [
+  {
+    quote:
+      'Meu pai levava o carro no seu João de Freitas nos anos 80. Hoje eu levo o meu, e são os filhos dele que me atendem. Essa continuidade não tem preço.',
+    author: 'Ricardo Albuquerque',
+    role: 'Cliente há 30 anos · Boa Viagem, Recife',
+  },
+  {
+    quote:
+      'A caixa de marcha do meu carro voltou melhor do que nova. Trabalho honesto, orçamento justo e entrega no prazo combinado. Referência em Recife.',
+    author: 'Juliana Cavalcanti',
+    role: 'Casa Forte, Recife',
+  },
+  {
+    quote:
+      'Levei para uma lanternagem depois de uma batida. Devolveram o carro impecável, como se nada tivesse acontecido.',
+    author: 'Marcos Siqueira',
+    role: 'Espinheiro, Recife',
+  },
+];
+
+---
+
+<Layout>
+  <Nav />
+
+  <main id="conteudo">
+    <!-- ============================================================
+         HERO
+    ============================================================== -->
+    <section
+      id="top"
+      class="relative overflow-hidden pt-32 sm:pt-40 pb-20 sm:pb-28"
+    >
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 bg-radial-leao"
+      >
+      </div>
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 opacity-[0.35] bg-grain mix-blend-overlay"
+      >
+      </div>
+
+      <div class="relative section !py-0">
+        <div class="max-w-3xl animate-fade-up">
+          <span class="eyebrow">
+            <Icon name="ph:medal-duotone" class="inline-block h-4 w-4 -mt-1 mr-1" />
+            Desde 1974 · Recife
+          </span>
+
+          <h1
+            class="mt-5 text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05]
+                   text-leao-white"
+          >
+            Oficina <span class="text-leao-orange">Leão</span>:
+            <br class="hidden sm:block" />
+            <span class="italic text-leao-silver">Tradição que move</span>
+            gerações desde 1974.
+          </h1>
+
+          <p
+            class="mt-7 max-w-2xl text-lg sm:text-xl text-leao-silver leading-relaxed"
+          >
+            Duas gerações da mesma família — pai e filhos — cuidando do seu carro
+            com a honestidade de quem aprendeu o ofício no chão da oficina.
+            Autoridade técnica, confiança de bairro e o carinho de quem trata
+            cada veículo como se fosse da família.
+          </p>
+
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <button type="button" data-open-specialist-picker class="btn-primary">
+              <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
+              Solicitar Orçamento
+            </button>
+            <a href="#caixa-de-marcha" class="btn-ghost">
+              Nossas Especialidades
+              <Icon name="ph:arrow-down-duotone" class="h-5 w-5" />
+            </a>
+          </div>
+
+          <dl class="mt-14 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl">
+            {
+              [
+                { k: '50', v: 'Anos de história' },
+                { k: '2', v: 'Gerações da família' },
+              ].map((s) => (
+                <div class="glass rounded-2xl px-5 py-4">
+                  <dt class="font-display text-3xl text-leao-orange">{s.k}</dt>
+                  <dd class="text-sm text-leao-silver">{s.v}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         NOSSA HISTÓRIA
+    ============================================================== -->
+    <section id="historia" class="section">
+      <div class="grid gap-12 lg:grid-cols-2 lg:items-center">
+        <div>
+          <span class="eyebrow">Nossa História</span>
+          <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl text-leao-white">
+            Começou com o <span class="text-leao-orange">pai</span>,
+            continua com os <span class="italic">filhos especialistas</span>.
+          </h2>
+
+          <div class="mt-8 space-y-5 text-leao-silver leading-relaxed text-lg">
+            <p>
+              Em <strong class="text-leao-white">1974</strong>, Seu João de Freitas — mecânico
+              geral de mãos calejadas e olhar atento — abriu as portas de uma
+              pequena oficina em Recife. Trabalhava sozinho, com ferramentas
+              contadas e uma filosofia simples: “cliente bom é cliente que volta”.
+            </p>
+            <p>
+              Cinco décadas depois, a oficina virou referência na cidade. Os filhos,
+              que cresceram entre chaves de boca e cheiro de óleo, se especializaram
+              cada um em sua arte —
+              <strong class="text-leao-white">caixa de marcha</strong>,
+              <strong class="text-leao-white">pintura e lanternagem</strong>,
+              <strong class="text-leao-white">motor e mecânica geral</strong> — e
+              hoje tocam juntos o legado do pai.
+            </p>
+            <p class="italic text-leao-white/90">
+              “Aqui dentro, cada carro tem nome. E cada cliente tem história.”
+            </p>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div
+            class="glass-strong relative overflow-hidden rounded-3xl p-1
+                   shadow-premium animate-float-slow"
+          >
+            <figure
+              class="relative aspect-[4/5] overflow-hidden rounded-[calc(theme(borderRadius.3xl)-0.25rem)]
+                     ring-1 ring-white/10"
+            >
+              <img
+                src="/images/pai.jpeg"
+                alt="Seu João de Freitas, fundador da Oficina Leão, em Recife"
+                class="h-full w-full object-cover object-center origin-center scale-[1.15]"
+                width="1200"
+                height="1500"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption
+                class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75
+                       to-transparent px-6 pb-6 pt-16 text-center"
+              >
+                <p class="font-display text-2xl text-leao-white sm:text-3xl">
+                  Oficina Leão
+                </p>
+                <p class="mt-1 text-xs uppercase tracking-[0.35em] text-leao-silver">
+                  Desde 1974
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div
+            class="absolute -bottom-5 -left-5 glass rounded-2xl px-5 py-3
+                   flex items-center gap-3 shadow-premium"
+          >
+            <Icon name="ph:seal-check-duotone" class="h-8 w-8 text-leao-orange" />
+            <div class="text-sm">
+              <div class="font-medium text-leao-white">Tradição familiar</div>
+              <div class="text-leao-silver">Pai e filhos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ESPECIALIDADES — uma seção por serviço (layout alternado)
+    ============================================================== -->
+    {
+      specialties.map((s, i) => {
+        const reverse = i % 2 === 1;
+        return (
+          <section
+            id={s.id}
+            class:list={[
+              'relative overflow-hidden',
+              reverse ? 'bg-leao-blue/40' : '',
+            ]}
+          >
+            <div
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 opacity-60"
+              style={`background: radial-gradient(600px 300px at ${
+                reverse ? '90% 10%' : '10% 90%'
+              }, rgba(230,126,34,0.10), transparent 60%);`}
+            />
+
+            <div class="section relative">
+              <div
+                class:list={[
+                  'grid gap-12 lg:grid-cols-2 lg:items-center',
+                  reverse && 'lg:[&>*:first-child]:order-2',
+                ]}
+              >
+                {/* Texto */}
+                <div>
+                  <h2 class="text-3xl sm:text-4xl md:text-5xl text-leao-white">
+                    {s.title}
+                  </h2>
+                  <p class="mt-3 flex items-center gap-2 text-sm text-leao-orange/90 uppercase tracking-wider">
+                    <Icon name="ph:shield-check-duotone" class="h-4 w-4" />
+                    {s.focus}
+                  </p>
+
+                  <p class="mt-6 text-leao-silver leading-relaxed text-lg">
+                    {s.description}
+                  </p>
+
+                  <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+                    {s.bullets.map((b) => (
+                      <li class="flex items-start gap-2.5 text-leao-white/90">
+                        <Icon
+                          name="ph:check-circle-duotone"
+                          class="h-5 w-5 shrink-0 text-leao-orange mt-0.5"
+                        />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div class="mt-8 flex flex-wrap items-center gap-4">
+                    <a
+                      href={waLink(s.phone, s.waMessage)}
+                      target="_blank"
+                      rel="noopener"
+                      class="btn-primary"
+                    >
+                      <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
+                      Falar com o especialista
+                    </a>
+                    <span class="text-sm text-leao-silver">
+                      <Icon
+                        name="ph:user-circle-duotone"
+                        class="inline-block h-4 w-4 -mt-0.5 mr-1 text-leao-orange"
+                      />
+                      {s.specialist}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card visual */}
+                <div class="relative">
+                  <div
+                    class="glass-strong relative overflow-hidden rounded-3xl shadow-premium
+                           aspect-square ring-1 ring-white/10"
+                  >
+                    <img
+                      src={s.image}
+                      alt={`${s.specialist} — ${s.title}`}
+                      class="h-full w-full object-cover"
+                      width="1200"
+                      height="1200"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        );
+      })
+    }
+
+    <!-- ============================================================
+         PROVA SOCIAL
+    ============================================================== -->
+    <section id="depoimentos" class="section">
+      <div class="max-w-2xl">
+        <span class="eyebrow">Prova Social</span>
+        <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl text-leao-white">
+          Quem é de <span class="text-leao-orange">Recife</span> conhece,
+          quem é cliente <span class="italic">volta</span>.
+        </h2>
+        <p class="mt-5 text-leao-silver leading-relaxed text-lg">
+          A melhor propaganda da Oficina Leão sempre foi o boca a boca de bairro
+          em bairro — de Boa Viagem à Casa Forte, de Jejipió ao Pina.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {testimonials.map((t) => <Testimonial {...t} />)}
+      </div>
+
+      <div
+        class="mt-16 glass-strong rounded-3xl p-8 sm:p-12 flex flex-col
+               items-start gap-6 sm:flex-row sm:items-center sm:justify-between"
+      >
+        <div>
+          <h3 class="text-2xl sm:text-3xl text-leao-white">
+            Pronto para sentir a diferença de <span class="text-leao-orange">50 anos de oficina</span>?
+          </h3>
+          <p class="mt-2 text-leao-silver">
+            Fale com a gente no WhatsApp e receba seu orçamento sem compromisso.
+          </p>
+        </div>
+        <button type="button" data-open-specialist-picker class="btn-primary shrink-0">
+          <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
+          Falar Agora
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+
+  <SpecialistPicker specialists={specialties as any} />
+</Layout>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://oficinaleao.com.br/sitemap.xml

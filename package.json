@@ -1,0 +1,30 @@
+{
+  "name": "oficina-leao",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Site institucional da Oficina Leão — tradição que move gerações desde 1974.",
+  "packageManager": "pnpm@9.12.3",
+  "engines": {
+    "node": ">=18.17.0",
+    "pnpm": ">=9"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/tailwind": "^5.1.2",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/playfair-display": "^5.2.8",
+    "@iconify-json/ph": "^1.2.1",
+    "astro": "^4.16.10",
+    "astro-icon": "^1.1.5",
+    "tailwindcss": "^3.4.14"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0"
+  }
+}

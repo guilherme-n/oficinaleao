@@ -1,0 +1,59 @@
+---
+import { Icon } from 'astro-icon/components';
+import LeaoLogo from './LeaoLogo.astro';
+
+const links = [
+  { href: '#historia', label: 'História' },
+  { href: '#caixa-de-marcha', label: 'Caixa de Marcha' },
+  { href: '#pintura-lanternagem', label: 'Pintura' },
+  { href: '#motor-mecanica', label: 'Motor' },
+  { href: '#depoimentos', label: 'Depoimentos' },
+];
+---
+
+<header class="fixed inset-x-0 top-0 z-40">
+  <div class="mx-auto mt-3 max-w-6xl px-4">
+    <nav
+      class="glass-strong flex items-center justify-between rounded-full
+             px-4 py-2.5 sm:px-6"
+      aria-label="Navegação principal"
+    >
+      <a href="#top" class="flex items-center gap-2.5 group">
+        <span
+          class="flex h-9 w-9 items-center justify-center rounded-full
+                 bg-leao-orange/15 ring-1 ring-leao-orange/40 text-leao-orange
+                 transition group-hover:bg-leao-orange group-hover:text-leao-white"
+        >
+          <LeaoLogo class="h-6 w-6" />
+        </span>
+        <span class="font-display text-lg tracking-wide">
+          Oficina <span class="text-leao-orange">Leão</span>
+        </span>
+      </a>
+
+      <ul class="hidden items-center gap-7 md:flex">
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                class="text-sm text-leao-silver transition hover:text-leao-white"
+              >
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <button
+        type="button"
+        data-open-specialist-picker
+        class="btn-primary !py-2 !px-4 text-sm"
+      >
+        <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
+        <span class="hidden sm:inline">Orçamento</span>
+      </button>
+    </nav>
+  </div>
+</header>

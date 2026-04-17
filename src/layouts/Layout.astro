@@ -1,0 +1,209 @@
+---
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'Oficina Leão | Mecânica em Recife/PE desde 1974 · Caixa de Marcha, Pintura e Motor',
+  description = 'Oficina mecânica familiar em Recife/PE desde 1974. Especialistas em caixa de marcha, pintura e lanternagem e motor. Tradição, confiança e precisão técnica — atendimento direto com o especialista via WhatsApp.',
+  image = '/og-image.jpg',
+  canonical,
+} = Astro.props;
+
+const canonicalURL =
+  canonical ?? new URL(Astro.url.pathname, Astro.site).toString();
+
+// Schema.org — AutoRepair (LocalBusiness) com múltiplos contactPoints
+// um por especialista (pai e três filhos), melhora SEO local e Knowledge Panel.
+const localBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AutoRepair',
+  '@id': `${Astro.site}#oficinaleao`,
+  name: 'Oficina Leão',
+  alternateName: 'Oficina Leão Recife',
+  description,
+  image: new URL(image, Astro.site).toString(),
+  logo: new URL('/favicon.svg', Astro.site).toString(),
+  url: Astro.site?.toString(),
+  priceRange: '$$',
+  foundingDate: '1974',
+  slogan: 'Tradição que move gerações desde 1974',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Rua da Esperança, 1070 - Barro, Recife',
+    addressLocality: 'Recife',
+    addressRegion: 'PE',
+    postalCode: '50000-000',
+    addressCountry: 'BR',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: -8.0476,
+    longitude: -34.877,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '08:00',
+      closes: '12:00',
+    },
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      name: 'Caixa de Marcha — Iran Leão',
+      telephone: '+55-81-98431-5470',
+      contactType: 'Orçamento / Atendimento',
+      areaServed: 'BR',
+      availableLanguage: ['Portuguese'],
+    },
+    {
+      '@type': 'ContactPoint',
+      name: 'Pintura e Lanternagem — Iraquitan Leão',
+      telephone: '+55-81-98501-2206',
+      contactType: 'Orçamento / Atendimento',
+      areaServed: 'BR',
+      availableLanguage: ['Portuguese'],
+    },
+    {
+      '@type': 'ContactPoint',
+      name: 'Motor e Mecânica Geral — Iverealdo Leão',
+      telephone: '+55-81-98899-8533',
+      contactType: 'Orçamento / Atendimento',
+      areaServed: 'BR',
+      availableLanguage: ['Portuguese'],
+    },
+  ],
+  sameAs: [
+    'https://www.instagram.com/oficinaleao',
+  ],
+  areaServed: [
+    { '@type': 'City', name: 'Recife' },
+    { '@type': 'City', name: 'Olinda' },
+    { '@type': 'City', name: 'Jaboatão dos Guararapes' },
+    { '@type': 'City', name: 'Paulista' },
+    { '@type': 'AdministrativeArea', name: 'Pernambuco' },
+  ],
+  makesOffer: [
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Caixa de Marcha',
+        description:
+          'Revisão, retífica e troca de câmbios manuais e automáticos.',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Pintura e Lanternagem',
+        description:
+          'Recuperação de funilaria e pintura automotiva com cabine climatizada.',
+      },
+    },
+    {
+      '@type': 'Offer',
+      itemOffered: {
+        '@type': 'Service',
+        name: 'Motor e Mecânica Geral',
+        description:
+          'Retífica de motor, injeção eletrônica, diagnóstico computadorizado e manutenção preventiva.',
+      },
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#1A2B3C" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="oficina mecânica Recife, caixa de marcha Recife, pintura automotiva Recife, lanternagem Recife, retífica de motor Recife, oficina familiar, Oficina Leão, mecânica Pernambuco"
+    />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- SEO Local -->
+    <meta name="geo.region" content="BR-PE" />
+    <meta name="geo.placename" content="Recife" />
+    <meta name="geo.position" content="-8.0476;-34.8770" />
+    <meta name="ICBM" content="-8.0476, -34.8770" />
+    <meta name="author" content="Oficina Leão" />
+    <meta
+      name="robots"
+      content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Oficina Leão" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL(image, Astro.site).toString()} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Oficina Leão — mecânica em Recife desde 1974" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site).toString()} />
+
+    <!-- Favicon + PWA manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Sitemap -->
+    <link
+      rel="sitemap"
+      type="application/xml"
+      title="Sitemap"
+      href="/sitemap.xml"
+    />
+
+    <!-- Schema.org LocalBusiness (AutoRepair) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(localBusinessSchema)}
+    />
+  </head>
+  <body class="min-h-screen antialiased">
+    <a
+      href="#conteudo"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 btn-primary"
+    >
+      Ir para o conteúdo
+    </a>
+
+    <slot />
+  </body>
+</html>
