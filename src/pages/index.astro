@@ -11,6 +11,8 @@ import { Icon } from 'astro-icon/components';
  * pois é atendida por um filho diferente. Substitua os números
  * pelos contatos reais antes de publicar.
  */
+const yearsSince1974 = new Date().getFullYear() - 1974;
+
 const encode = (msg: string) => encodeURIComponent(msg);
 const waLink = (phone: string, msg: string) =>
   `https://wa.me/${phone}?text=${encode(msg)}`;
@@ -59,7 +61,7 @@ const specialties = [
     title: 'Motor e Mecânica Geral',
     focus: 'Performance e Diagnóstico',
     icon: 'ph:engine-duotone',
-    specialist: 'Iverealdo Leão',
+    specialist: 'Iveraldo Leão',
     description:
       'Diagnóstico computadorizado, retífica de motor, injeção eletrônica e manutenção preventiva. Performance devolvida ao seu carro com a confiança de décadas de oficina.',
     bullets: [
@@ -161,7 +163,7 @@ const testimonials = [
           <dl class="mt-14 grid grid-cols-2 sm:grid-cols-3 gap-6 max-w-2xl">
             {
               [
-                { k: '50', v: 'Anos de história' },
+                { k: String(yearsSince1974), v: 'Anos de história' },
                 { k: '2', v: 'Gerações da família' },
               ].map((s) => (
                 <div class="glass rounded-2xl px-5 py-4">
@@ -369,7 +371,7 @@ const testimonials = [
       >
         <div>
           <h3 class="text-2xl sm:text-3xl text-leao-white">
-            Pronto para sentir a diferença de <span class="text-leao-orange">50 anos de oficina</span>?
+            Pronto para sentir a diferença de <span class="text-leao-orange">{yearsSince1974} anos de oficina</span>?
           </h3>
           <p class="mt-2 text-leao-silver">
             Fale com a gente no WhatsApp e receba seu orçamento sem compromisso.
