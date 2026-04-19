@@ -3,6 +3,9 @@ import { Icon } from 'astro-icon/components';
 import LeaoLogo from './LeaoLogo.astro';
 
 const year = new Date().getFullYear();
+
+const mapsUrl =
+  'https://www.google.com/maps/search/?api=1&query=Rua+Luiz+Soares%2C+147+-+Tejipio%2C+Recife+-+PE%2C+50930-050';
 ---
 
 <footer id="contato" class="relative border-t border-white/10 bg-leao-blue/60">
@@ -25,20 +28,23 @@ const year = new Date().getFullYear();
           Tradição familiar em mecânica desde 1974. Especialistas cuidando do seu
           carro com a honestidade de quem conhece cada peça de perto.
         </p>
-
-        <button type="button" data-open-specialist-picker class="btn-primary mt-6">
-          <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
-          Falar no WhatsApp
-        </button>
       </div>
 
       <!-- Endereço -->
       <div>
         <h3 class="text-lg font-display text-leao-white">Endereço</h3>
-        <ul class="mt-5 space-y-3 text-leao-silver">
+        <ul class="mt-2 space-y-3 text-leao-silver">
           <li class="flex items-start gap-3">
-            <Icon name="ph:map-pin-duotone" class="mt-0.5 h-5 w-5 text-leao-orange" />
-            <span>Rua da Esperança, 1070 - Barro, Recife<br />Recife — PE, 52291-427</span>
+            <span>
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-1.5 text-sm font-medium text-leao-orange transition hover:text-leao-orange/80"
+              >
+              Rua Luiz Soares, 147 - Tejipió, Recife
+              </a>
+            </span>
           </li>
         </ul>
       </div>

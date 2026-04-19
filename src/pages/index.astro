@@ -13,28 +13,24 @@ import { Icon } from 'astro-icon/components';
  */
 const yearsSince1974 = new Date().getFullYear() - 1974;
 
-const encode = (msg: string) => encodeURIComponent(msg);
-const waLink = (phone: string, msg: string) =>
-  `https://wa.me/${phone}?text=${encode(msg)}`;
-
 const specialties = [
   {
-    id: 'caixa-de-marcha',
-    title: 'Caixa de Marcha',
+    id: 'cambio-manual',
+    title: 'Câmbio manual',
     focus: 'Precisão Técnica',
     icon: 'ph:gear-six-duotone',
     specialist: 'Iran Leão',
     description:
-      'Revisão, retífica e troca de câmbios manuais e automáticos com precisão milimétrica. Diagnóstico preciso e peças selecionadas para uma troca de marchas suave e durável — exatamente como saiu de fábrica.',
+      'Revisão, retífica e troca de câmbios manuais com precisão milimétrica. Diagnóstico preciso e peças selecionadas para uma troca de marchas suave e durável — exatamente como saiu de fábrica.',
     bullets: [
       'Retífica completa de câmbio manual',
       'Diagnóstico de câmbios manuais',
       'Troca de embreagem e volante bimassa',
-      'Teste em dinamômetro antes da entrega',
+      'Venda de câmbios manuais',
     ],
     phone: '5581984315470',
     waMessage:
-      'Olá! Gostaria de um orçamento para serviço de caixa de marcha na Oficina Leão.',
+      'Olá! Gostaria de um orçamento para serviço de câmbio manual na Oficina Leão.',
     image: '/images/especialista-cambio.jpeg',
   },
   {
@@ -86,7 +82,7 @@ const testimonials = [
   },
   {
     quote:
-      'A caixa de marcha do meu carro voltou melhor do que nova. Trabalho honesto, orçamento justo e entrega no prazo combinado. Referência em Recife.',
+      'O câmbio manual do meu carro voltou melhor do que novo. Trabalho honesto, orçamento justo e entrega no prazo combinado. Referência em Recife.',
     author: 'Juliana Cavalcanti',
     role: 'Casa Forte, Recife',
   },
@@ -137,7 +133,7 @@ const testimonials = [
               Oficina <span class="text-leao-orange">Leão</span>
             </span>
             <span class="italic text-leao-silver">Tradição que move</span>
-            gerações desde 1974
+            gerações
           </h1>
 
           <p
@@ -154,7 +150,7 @@ const testimonials = [
               <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
               Solicitar Orçamento
             </button>
-            <a href="#caixa-de-marcha" class="btn-ghost">
+            <a href="#cambio-manual" class="btn-ghost">
               Nossas Especialidades
               <Icon name="ph:arrow-down-duotone" class="h-5 w-5" />
             </a>
@@ -185,8 +181,12 @@ const testimonials = [
         <div>
           <span class="eyebrow">Nossa História</span>
           <h2 class="mt-4 text-3xl sm:text-4xl md:text-5xl text-leao-white">
-            Começou com o <span class="text-leao-orange">pai</span>
-            Continua com os <span class="text-leao-orange">filhos</span>
+            <span class="block sm:inline">
+              Começou com o <span class="text-leao-orange">pai</span>
+            </span>
+            <span class="block sm:inline">
+              Continua com os <span class="text-leao-orange">filhos</span>
+            </span>
           </h2>
 
           <div class="mt-8 space-y-5 text-leao-silver leading-relaxed text-lg">
@@ -200,7 +200,7 @@ const testimonials = [
               Cinco décadas depois, a oficina virou referência na cidade. Os filhos,
               que cresceram entre chaves de boca e cheiro de óleo, se especializaram
               cada um em sua arte —
-              <strong class="text-leao-white">caixa de marcha</strong>,
+              <strong class="text-leao-white">câmbio manual</strong>,
               <strong class="text-leao-white">pintura e lanternagem</strong>,
               <strong class="text-leao-white">motor e mecânica geral</strong> — e
               hoje tocam juntos o legado do pai.
@@ -302,22 +302,14 @@ const testimonials = [
                   </ul>
 
                   <div class="mt-8 flex flex-wrap items-center gap-4">
-                    <a
-                      href={waLink(s.phone, s.waMessage)}
-                      target="_blank"
-                      rel="noopener"
+                    <button
+                      type="button"
+                      data-open-specialist-picker
                       class="btn-primary"
                     >
                       <Icon name="ph:whatsapp-logo-duotone" class="h-5 w-5" />
                       Falar com o especialista
-                    </a>
-                    <span class="text-sm text-leao-silver">
-                      <Icon
-                        name="ph:user-circle-duotone"
-                        class="inline-block h-4 w-4 -mt-0.5 mr-1 text-leao-orange"
-                      />
-                      {s.specialist}
-                    </span>
+                    </button>
                   </div>
                 </div>
 

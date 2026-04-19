@@ -12,6 +12,7 @@ export default defineConfig({
       include: {
         ph: [
           'arrow-down-duotone',
+          'arrow-square-out-duotone',
           'check-circle-duotone',
           'engine-duotone',
           'gear-six-duotone',
@@ -21,7 +22,6 @@ export default defineConfig({
           'quotes-duotone',
           'seal-check-duotone',
           'shield-check-duotone',
-          'user-circle-duotone',
           'whatsapp-logo-duotone',
           'x-bold',
         ],

@@ -9,8 +9,8 @@ export interface Props {
 }
 
 const {
-  title = 'Oficina Leão | Mecânica em Recife/PE desde 1974 · Caixa de Marcha, Pintura e Motor',
-  description = 'Oficina mecânica familiar em Recife/PE desde 1974. Especialistas em caixa de marcha, pintura e lanternagem e motor. Tradição, confiança e precisão técnica — atendimento direto com o especialista via WhatsApp.',
+  title = 'Oficina Leão | Mecânica em Recife/PE desde 1974 · Câmbio manual, Pintura e Motor',
+  description = 'Oficina mecânica familiar em Recife/PE desde 1974. Especialistas em câmbio manual, pintura e lanternagem e motor. Tradição, confiança e precisão técnica — atendimento direto com o especialista via WhatsApp.',
   image = '/og-image.jpg',
   canonical,
 } = Astro.props;
@@ -35,16 +35,16 @@ const localBusinessSchema = {
   slogan: 'Tradição que move gerações desde 1974',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Rua da Esperança, 1070 - Barro, Recife',
+    streetAddress: 'Rua Luiz Soares, 147 - Tejipio, Recife - PE, 50930-050',
     addressLocality: 'Recife',
     addressRegion: 'PE',
-    postalCode: '50000-000',
+    postalCode: '50930-050',
     addressCountry: 'BR',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: -8.0476,
-    longitude: -34.877,
+    latitude: -8.0907667,
+    longitude: -34.9480735,
   },
   openingHoursSpecification: [
     {
@@ -63,7 +63,7 @@ const localBusinessSchema = {
   contactPoint: [
     {
       '@type': 'ContactPoint',
-      name: 'Caixa de Marcha — Iran Leão',
+      name: 'Câmbio manual — Iran Leão',
       telephone: '+55-81-98431-5470',
       contactType: 'Orçamento / Atendimento',
       areaServed: 'BR',
@@ -101,7 +101,7 @@ const localBusinessSchema = {
       '@type': 'Offer',
       itemOffered: {
         '@type': 'Service',
-        name: 'Caixa de Marcha',
+        name: 'Câmbio manual',
         description:
           'Revisão, retífica e troca de câmbios manuais e automáticos.',
       },
@@ -144,15 +144,15 @@ const localBusinessSchema = {
     <meta name="description" content={description} />
     <meta
       name="keywords"
-      content="oficina mecânica Recife, caixa de marcha Recife, pintura automotiva Recife, lanternagem Recife, retífica de motor Recife, oficina familiar, Oficina Leão, mecânica Pernambuco"
+      content="oficina mecânica Recife, câmbio manual Recife, pintura automotiva Recife, lanternagem Recife, retífica de motor Recife, oficina familiar, Oficina Leão, mecânica Pernambuco"
     />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- SEO Local -->
     <meta name="geo.region" content="BR-PE" />
     <meta name="geo.placename" content="Recife" />
-    <meta name="geo.position" content="-8.0476;-34.8770" />
-    <meta name="ICBM" content="-8.0476, -34.8770" />
+    <meta name="geo.position" content="-8.0907667;-34.9480735" />
+    <meta name="ICBM" content="-8.0907667, -34.9480735" />
     <meta name="author" content="Oficina Leão" />
     <meta
       name="robots"
